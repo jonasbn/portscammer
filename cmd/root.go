@@ -51,8 +51,8 @@ func init() {
 	rootCmd.Flags().StringVarP(&logFile, "log-file", "l", "portscammer.log", "Log file path")
 	rootCmd.Flags().StringVarP(&logLevel, "log-level", "L", "info", "Log level (debug, info, warn, error)")
 	rootCmd.Flags().IntVarP(&threshold, "threshold", "t", 5, "Number of connections to trigger scan detection")
-	rootCmd.Flags().BoolVar(&noUI, "no-ui", false, "Disable terminal UI and run in headless mode")
-	rootCmd.Flags().BoolVar(&debug, "debug", false, "Enable debug logging")
+	rootCmd.Flags().BoolVarP(&noUI, "no-ui", "n", false, "Disable terminal UI and run in headless mode")
+	rootCmd.Flags().BoolVarP(&debug, "debug", "d", false, "Enable debug logging")
 }
 
 // runPortScammer starts the port scanner detection application
