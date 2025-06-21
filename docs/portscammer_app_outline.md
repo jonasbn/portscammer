@@ -16,9 +16,9 @@ Generate instructions in this order
 3. Create a `cmd` directory to store the command line commands
 4. Update the existing `main.go` file that initializes the Cobra command and starts the application
 5. Create a `portscammer` package that contains the core logic of the application
-    - This package should handle the TCP connections, detect port scans, log the scans, and provide a way to display them
-    - The package should also include a function to start listening on a specified port
-    - Use the `logrus` package for logging functionality
+    * This package should handle the TCP connections, detect port scans, log the scans, and provide a way to display them
+    * The package should also include a function to start listening on a specified port
+    * Use the `logrus` package for logging functionality
 6. Create a `ui` package that contains the terminal user interface built with Bubbles
 7. Create a `config` package to handle configuration settings for the application
 8. Create a `models` package to define the data structures used in the application
