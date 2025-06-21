@@ -20,6 +20,7 @@ var (
 	logLevel  string
 	threshold int
 	noUI      bool
+	debug     bool
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -51,6 +52,7 @@ func init() {
 	rootCmd.Flags().StringVarP(&logLevel, "log-level", "L", "info", "Log level (debug, info, warn, error)")
 	rootCmd.Flags().IntVarP(&threshold, "threshold", "t", 5, "Number of connections to trigger scan detection")
 	rootCmd.Flags().BoolVar(&noUI, "no-ui", false, "Disable terminal UI and run in headless mode")
+	rootCmd.Flags().BoolVar(&debug, "debug", false, "Enable debug logging")
 }
 
 // runPortScammer starts the port scanner detection application
@@ -63,6 +65,7 @@ func runPortScammer() {
 	cfg.LogLevel = logLevel
 	cfg.ScanThreshold = threshold
 	cfg.UIEnabled = !noUI
+	cfg.Debug = debug
 
 	// Validate configuration
 	if err := cfg.Validate(); err != nil {
@@ -106,7 +109,7 @@ func runPortScammer() {
 
 	if cfg.UIEnabled {
 		// Start TUI
-		model := ui.NewModel(scanner)
+		model := ui.NewModel(scanner, cfg.Debug)
 		p := tea.NewProgram(model, tea.WithAltScreen())
 
 		if _, err := p.Run(); err != nil {

@@ -14,6 +14,7 @@ type Config struct {
 	// Logging configuration
 	LogFile  string `json:"log_file"`
 	LogLevel string `json:"log_level"`
+	Debug    bool   `json:"debug"` // Enable debug logging
 
 	// Detection configuration
 	ScanThreshold    int           `json:"scan_threshold"`    // Number of connections to trigger scan detection
@@ -41,6 +42,7 @@ func DefaultConfig() *Config {
 		Protocol:         "tcp",
 		LogFile:          "portscammer.log",
 		LogLevel:         "info",
+		Debug:            false, // Debug disabled by default
 		ScanThreshold:    5,
 		TimeWindow:       time.Minute * 5,
 		BlacklistEnabled: false,

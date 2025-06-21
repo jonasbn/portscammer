@@ -9,4 +9,4 @@ echo "In another terminal, run: ./test_scan.sh"
 echo "Or manually: nc -z localhost 8080 (run this 3+ times quickly)"
 echo ""
 
-./portscammer --log-level debug --threshold 2 --log-file debug.log
+./portscammer --debug --threshold 2 --log-file debug.log
