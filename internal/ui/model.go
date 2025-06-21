@@ -2,6 +2,7 @@ package ui
 
 import (
 	"fmt"
+	"log"
 	"strings"
 	"time"
 
@@ -25,6 +26,7 @@ type Model struct {
 	height     int
 	ready      bool
 	lastUpdate time.Time
+	tickCount  int // Counter for debug logging every 10 seconds
 }
 
 // NewModel creates a new UI model
@@ -110,12 +112,21 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case tea.KeyMsg:
 		switch msg.String() {
 		case "q", "ctrl+c":
+			log.Printf("[DEBUG] Quit key pressed: %s", msg.String())
 			return m, tea.Quit
 		case "r":
+			log.Printf("[DEBUG] Refresh key pressed: %s", msg.String())
 			m.refresh()
+			return m, nil // Return immediately after refresh
 		}
 
 	case tickMsg:
+		m.tickCount++
+		// Log debug message every 10 seconds (every 5 ticks since ticks are every 2 seconds)
+		if m.tickCount%5 == 0 {
+			log.Printf("[DEBUG] UI tick update - Count: %d, Events: %d, Last Update: %s",
+				m.tickCount, len(m.events), m.lastUpdate.Format("15:04:05"))
+		}
 		m.refresh()
 		return m, tickCmd()
 	}
@@ -172,6 +183,7 @@ func (m Model) View() string {
 // refresh updates the model with latest data from the scanner
 func (m *Model) refresh() {
 	if m.scanner == nil {
+		log.Printf("[DEBUG] UI refresh called but scanner is nil")
 		return
 	}
 
@@ -179,6 +191,8 @@ func (m *Model) refresh() {
 	m.events = m.scanner.GetEvents()
 	m.stats = m.scanner.GetStats()
 	m.lastUpdate = time.Now()
+
+	log.Printf("[DEBUG] UI refresh - Retrieved %d events, %d total scans", len(m.events), m.stats.TotalScans)
 
 	// Update table rows
 	rows := make([]table.Row, 0, len(m.events))
@@ -202,6 +216,7 @@ func (m *Model) refresh() {
 	}
 
 	m.table.SetRows(rows)
+	log.Printf("[DEBUG] UI refresh - Set %d rows in table", len(rows))
 }
 
 // renderStats renders the statistics section
