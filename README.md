@@ -8,7 +8,6 @@ Port Scammer is a CLI application that continuously monitors for potential port 
 - **Terminal User Interface**: Beautiful TUI built with Bubbletea for real-time monitoring
 - **Configurable Detection**: Adjustable thresholds and time windows for scan detection
 - **Comprehensive Logging**: Detailed logging with configurable levels using Logrus
-- **Statistics Dashboard**: View scan statistics, unique IPs, and activity trends
 - **Headless Mode**: Run without UI for automated deployments
 - **IP Whitelisting/Blacklisting**: Configure trusted and blocked IP addresses
 
@@ -64,7 +63,7 @@ Flags:
 **Run with debug logging:**
 
 ```bash
-./portscammer --log-level debug --log-file debug.log
+./portscammer --debug --log-level debug --log-file debug.log
 ```
 
 **Run in headless mode:**
@@ -85,17 +84,16 @@ Flags:
 2. **Pattern Analysis**: It tracks connection patterns from source IPs within configurable time windows
 3. **Scan Detection**: When the number of connections from a single IP exceeds the threshold within the time window, it's flagged as a potential port scan
 4. **Alerting**: Detected scans are logged and displayed in the terminal UI with severity levels
-5. **Statistics**: The application maintains statistics about detected scans, unique IPs, and activity patterns
 
 ## Configuration
 
 The application uses sensible defaults but can be configured through command-line flags:
 
-- **Port**: The port to monitor (default: 8080)
-- **Host**: The interface to bind to (default: localhost)
-- **Threshold**: Number of connections to trigger detection (default: 5)
-- **Time Window**: Period for connection tracking (default: 5 minutes)
-- **Log Level**: Verbosity of logging (default: info)
+- **Port**: The port to monitor (default: `8080`)
+- **Host**: The interface to bind to (default: `localhost`)
+- **Threshold**: Number of connections to trigger detection (default: `1`)
+- **Time Window**: Period for connection tracking (default: `5` minutes)
+- **Log Level**: Verbosity of logging (default: `info`)
 
 ## Terminal UI
 
@@ -176,20 +174,20 @@ Based on my newly acquired knowledge I decided to write a tool that could let me
 
 ## License
 
-[Add your license information here]
+This application is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Troubleshooting
 
 **Permission denied when binding to port**:
 
-- Use a port number above 1024 for non-root users
+- Use a port number above `1024` for non-root users
 - Or run with appropriate privileges: `sudo ./portscammer --port 80`
 
 **No scans detected**:
 
 - Verify the scanner is listening on the expected port
 - Check if connections are actually reaching the application
-- Lower the threshold temporarily for testing
+- Lower the threshold temporarily for testing, do note the default is set to `1` connections
 
 **High resource usage**:
 
