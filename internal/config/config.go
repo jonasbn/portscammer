@@ -43,7 +43,7 @@ func DefaultConfig() *Config {
 		LogFile:          "portscammer.log",
 		LogLevel:         "info",
 		Debug:            false, // Debug disabled by default
-		ScanThreshold:    5,
+		ScanThreshold:    1,
 		TimeWindow:       time.Minute * 5,
 		BlacklistEnabled: false,
 		WhitelistEnabled: false,

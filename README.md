@@ -43,12 +43,13 @@ Start the scanner on the default port (8080):
 ./portscammer [flags]
 
 Flags:
+  -d, --debug              Enable debug logging
   -p, --port int           Port to listen on (default 8080)
   -H, --host string        Host to bind to (default "localhost")
   -l, --log-file string    Log file path (default "portscammer.log")
   -L, --log-level string   Log level (debug, info, warn, error) (default "info")
-  -t, --threshold int      Number of connections to trigger scan detection (default 5)
-      --no-ui              Disable terminal UI and run in headless mode
+  -t, --threshold int      Number of connections to trigger scan detection (default 1)
+  -n, --no-ui              Disable terminal UI and run in headless mode
   -h, --help               help for portscammer
 ```
 
