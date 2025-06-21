@@ -1,4 +1,4 @@
-Application Outline for Port Scammer CLI Tool
+# Application Outline for Port Scammer CLI Tool
 
 I want to build a CLI application that can run continuously and listed for possible port scans and alert the user if a potential port scan is detected. The application should also provide a way to log the scans and display them in a user-friendly manner.
 

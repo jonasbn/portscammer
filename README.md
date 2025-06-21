@@ -55,21 +55,25 @@ Flags:
 ### Examples
 
 **Listen on a specific port:**
+
 ```bash
 ./portscammer --port 9000
 ```
 
 **Run with debug logging:**
+
 ```bash
 ./portscammer --log-level debug --log-file debug.log
 ```
 
 **Run in headless mode:**
+
 ```bash
 ./portscammer --no-ui --port 8080
 ```
 
 **Configure scan detection threshold:**
+
 ```bash
 ./portscammer --threshold 10 --port 8080
 ```
@@ -99,7 +103,7 @@ The default terminal UI provides:
 - **Real-time Event Table**: Shows recent scan events with timestamps, source IPs, ports, and severity
 - **Statistics Panel**: Displays total scans, unique IPs, and last update time
 - **Activity Log**: Scrollable log of recent scanning activity
-- **Interactive Controls**: 
+- **Interactive Controls**:
   - `r` - Refresh display
   - `q` - Quit application
 
@@ -119,7 +123,7 @@ for port in 8080 8081 8082 8083 8084 8085; do nc -z localhost $port; done
 
 The application follows Go best practices with a clean modular structure:
 
-```
+```text
 portscammer/
 ├── cmd/                    # Cobra command definitions
 ├── internal/
@@ -176,15 +180,18 @@ Based on my newly acquired knowledge I decided to write a tool that could let me
 ## Troubleshooting
 
 **Permission denied when binding to port**:
+
 - Use a port number above 1024 for non-root users
 - Or run with appropriate privileges: `sudo ./portscammer --port 80`
 
 **No scans detected**:
+
 - Verify the scanner is listening on the expected port
 - Check if connections are actually reaching the application
 - Lower the threshold temporarily for testing
 
 **High resource usage**:
+
 - Adjust the cleanup interval in the scanner configuration
 - Consider the time window for connection tracking
 - Monitor log file sizes and rotate them regularly
